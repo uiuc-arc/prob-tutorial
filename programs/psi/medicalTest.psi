@@ -1,0 +1,12 @@
+def main(){
+    PatientSick := flip(0.01);
+    PositiveTest := 0;
+    if(PatientSick){
+        PositiveTest = flip(0.8);
+    }
+    else{
+        PositiveTest = flip(0.096);
+    }
+
+    return PatientSick;
+}

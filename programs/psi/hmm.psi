@@ -1,0 +1,53 @@
+dat HMM{
+    states : R[];
+    measurements: R[];
+    def HMM(){
+        states := array(0);
+        measurements := array(0);
+    }
+}
+
+def main(){
+    trueObs := [false, true, false, true, false];
+
+    def HMMsim(){
+    prev := HMM(); 
+    for i in [0..trueObs.length){
+        newState := transition(prev.states[prev.states.length-1]);
+        newObs := measure(newState);       
+        prev.states = prev.states ~ [newState];
+        prev.measurements = prev.measurements ~ [newObs];   
+    }
+    
+    return prev;
+    }
+
+    r := HMMsim();
+    for i in [0..trueObs.length){
+        observe(r.measurements[i] == trueObs[i]);
+    }
+    
+    return r.states;
+}
+
+def transition(state) {
+    if state{
+        return flip(0.7);
+    }
+    else{
+        return flip(0.3);
+    }
+}
+def measure(s) {
+    if s{
+        return flip(0.9);
+    }
+    else{
+        return flip(0.1);
+    }  
+}
+
+
+
+
+

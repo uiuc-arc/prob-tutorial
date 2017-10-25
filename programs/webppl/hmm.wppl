@@ -1,0 +1,27 @@
+var transition = function(state) {
+  return state ? flip(0.7) : flip(0.3)
+}
+
+var measure = function(s) {
+  return s ? flip(0.9) : flip(0.1)
+  //return s
+}
+
+var hmm = function(n) {
+  var prev = (n==1) ? {states: [], measurements:[]} : hmm(n-1)
+  var newState = transition(prev.states[prev.states.length-1])
+  var newObs = measure(newState)
+  return {states: prev.states.concat([newState]),
+      	measurements: prev.measurements.concat([newObs])}
+}
+///
+
+var trueObs = [false, true, false, true, false]
+
+var model = function(){
+  var r = hmm(trueObs.length)
+  condition(_.isEqual(r.measurements, trueObs))
+  return r.states
+};
+
+Infer({method: 'enumerate', maxExecutions: 100000}, model)

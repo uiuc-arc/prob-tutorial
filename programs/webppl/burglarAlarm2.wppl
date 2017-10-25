@@ -1,0 +1,14 @@
+var burglar_alarm = function() {
+  var earthquake = flip(0.002)
+  var burglary = flip(0.01)
+ 
+  var alarm = burglary? flip(0.99) : (earthquake? flip(0.1) : 0) ;
+  var phoneOn = earthquake? flip(0.6) : flip(0.99)
+  var maryWakes = (alarm && earthquake)? flip(0.8) : (alarm? flip(0.6) : flip(0.1))
+
+  var called = maryWakes && phoneOn;
+  condition (called)
+  return burglary
+}
+
+Infer({method:'enumerate'}, burglar_alarm)

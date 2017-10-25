@@ -1,0 +1,27 @@
+def main(){
+    outcomes := [1,2,3,4,5,6];
+    unnormalized := [2,1,1,1,1,1];     
+    
+    Z := 0;
+    for i in [0..unnormalized.length){
+        Z+=unnormalized[i];
+    }   
+   
+    for i in [0..unnormalized.length){
+        unnormalized[i] = unnormalized[i]/Z;
+    }
+    
+    def event_prob(x: R){
+        sum := 0;
+        for i in [0..outcomes.length){
+            if(outcomes[i]<=x)
+            {
+                sum += unnormalized[outcomes[i]-1];
+            }
+        }
+        return sum;
+    }    
+
+    return event_prob(3);
+
+}

@@ -1,0 +1,24 @@
+
+var trueSkill = function(){
+ 
+  var skillA = uniform(90, 110)
+  var skillB = uniform(90, 110)
+  var skillC = uniform(90, 110)
+ 
+ 
+  var perfA1 = gaussian(skillA, 15);
+  var perfB1 = gaussian(skillB, 15);
+  condition (perfA1 > perfB1);
+ 
+  var perfB2 = gaussian(skillB, 15);
+  var perfC2 = gaussian(skillC, 15);
+  condition (perfB2 > perfC2);
+ 
+  var perfA3 = gaussian(skillA, 15), perfC3 = gaussian(skillC, 15);
+  condition (perfA3 > perfC3);
+ 
+  return skillC;
+}
+
+
+Infer({method: 'MCMC', samples: 50000}, trueSkill)

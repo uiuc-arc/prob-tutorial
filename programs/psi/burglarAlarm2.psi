@@ -1,0 +1,35 @@
+def main(){
+    earthquake := flip(0.002);
+    burglary := flip(0.01);
+    alarm := 0;
+    if burglary {
+        alarm = flip(0.99);
+    }    
+    else if earthquake{
+        alarm = flip(0.1);
+    }
+
+    phoneOn := 0;
+    maryWakes := 0;
+    if earthquake{
+        phoneOn = flip(0.6);
+    }
+    else{
+        phoneOn = flip(0.99);
+    }
+
+    if alarm && earthquake{
+        maryWakes = flip(0.8);
+    }
+    else if alarm{
+        maryWakes = flip(0.6);
+    }
+    else{
+        maryWakes = flip(0.1);
+    }   
+
+    cond := maryWakes && phoneOn;
+    observe(cond);
+
+    return burglary;
+}

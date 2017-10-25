@@ -1,0 +1,13 @@
+var outcomes = [1,2,3,4,5,6]
+var unnormalized = [2,1,1,1,1,1];
+var normalize = function(lst) {
+  var Z = sum( unnormalized)
+  map ( function(x) {return x / Z; }, unnormalized )  
+}
+var probability = normalize (unnormalized)
+
+var event_probability = function(predicate) {
+  return sum (map ( function(idx) {return probability[idx-1]} , filter (predicate, outcomes)))
+}
+
+event_probability ( function(x) {return x <= 3} )

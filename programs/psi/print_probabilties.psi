@@ -1,0 +1,8 @@
+def main(){
+    outcomes := [1,2,3,4,5,6];
+    return prob(outcomes[1],outcomes);
+}
+
+def prob(x: R, outcomes: R[]){
+    return 1/outcomes.length;
+}

@@ -1,0 +1,18 @@
+var outcomes = [1,2,3,4,5,6]
+var unnormalized = [3,1,1,1,1,1];
+var normalize = function(lst) {
+  var Z = sum( unnormalized)
+  map ( function(x) {return x / Z; }, unnormalized )  
+}
+
+var probability = normalize (unnormalized)
+
+var dist = Categorical({ps: probability, vs: outcomes})
+
+
+var res =  Infer(
+  {method: 'enumerate', maxExecutions: 100},
+  function () {return 6 - sample(dist)} );
+
+
+res

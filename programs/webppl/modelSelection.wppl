@@ -1,0 +1,27 @@
+var data = [0xA]
+var data = [0xA, 0xB, 0xC, 0xC, 0xC, 0xC, 0xA, 0xD]
+
+var modelselect = function(){
+  var smallModel = [0xA, 0xB, 0xC]
+  var bigModel = [0xA, 0xB, 0xC, 0xD, 0xE]
+ 
+  var compare = function(model, data_pt) {
+	var idx = randomInteger({n: model.length})
+	var noisy_data = data_pt - flip(0.1)
+	condition( noisy_data == model[idx] )
+	//condition(data_pt == model[idx])
+  }
+    
+  var isSmall = flip(0.5);  // uninformed prior
+
+  if (isSmall) {  
+	map(function(data_pt) { compare(smallModel, data_pt) }, data )
+  } else { //isBig
+	map(function(data_pt) { compare(bigModel, data_pt) }, data )
+  }
+  return {smallModel: isSmall}
+}
+
+
+Infer({method: 'enumerate', maxExecutions: 1000}, modelselect);
+

@@ -1,0 +1,13 @@
+var poster = function() {
+  var PatientSick = flip(0.01);
+
+  var PositiveTest = PatientSick? flip(0.8): flip(0.096);
+
+  condition (PositiveTest == true);
+
+  return PatientSick;
+}
+
+var dist = Infer({method: 'enumerate'}, poster)
+dist
+
