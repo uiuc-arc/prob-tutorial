@@ -1,0 +1,51 @@
+var diceroll_iter = function(x){
+  // x is the current state
+  if (1<=x && x <=6) return x;
+ 
+  var coin = flip(0.5);
+ 
+  // xnew is the next state
+  var xnext =
+  	x == 0x0? (coin? 0xA : 0xB) :
+  	x == 0xA? (coin? 0xC : 0xD) :
+  	x == 0xB? (coin? 0xE : 0xF) :
+  	x == 0xC? (coin? 0xA : 1):
+  	x == 0xD? (coin? 2: 3):
+  	x == 0xE? (coin? 4: 5):
+  	x == 0xF? (coin? 6: 0xB) : -100;
+
+  return diceroll_iter(xnext);
+}
+
+var diceroll = function() {
+  var v = diceroll_iter(0);
+  return v;
+}
+
+var min = function(a,b) { a<b? a : b }
+
+var tworollsloaded = function(load) {
+  var r1 = diceroll();
+  var r2 = diceroll();
+ 
+  var r2prim = r1 > 1? r2 : min(r2 + load*flip(0.5), 6)
+ 
+  return r1+r2prim;
+}
+
+var tworollsobs = function() {
+ 
+  //return tworollsloaded(2);
+ 
+  var observations = [9, 10, 3, 2]
+ 
+  var load = randomInteger({n: 3}) // 0, 1, or 2
+ 
+  map ( function(obs) { condition(tworollsloaded(load) == obs) }, observations )
+ 
+  return load
+}
+
+//var res = Infer({method: 'MCMC', samples: 100000}, tworollsobs);
+Infer({method: 'enumerate', strategy:'breadthfirst', maxExecutions: 500000}, tworollsobs);
+

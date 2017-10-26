@@ -1,0 +1,38 @@
+var diceroll_iter = function(x){
+  // x is the current state
+  if (1<=x && x <=6) return x;
+ 
+  var coin = flip(0.5);
+ 
+  // xnew is the next state
+  var xnext =
+  	x == 0x0? (coin? 0xA : 0xB) :
+  	x == 0xA? (coin? 0xC : 0xD) :
+  	x == 0xB? (coin? 0xE : 0xF) :
+  	x == 0xC? (coin? 0xA : 1):
+  	x == 0xD? (coin? 2: 3):
+  	x == 0xE? (coin? 4: 5):
+  	x == 0xF? (coin? 6: 0xB) : -100;
+
+  return diceroll_iter(xnext);
+}
+
+var diceroll = function() {
+  var v = diceroll_iter(0);
+  return v;
+}
+
+var tworolls = function() {
+  var r1 = diceroll();
+  var r2 = diceroll();
+ 
+  condition (r1 + r2 > 9)
+ 
+  return r1;
+ 
+}
+
+
+Infer({method: 'MCMC', samples: 10000}, diceroll);
+//Infer({method: 'enumerate', maxExecutions: 120}, diceroll)
+

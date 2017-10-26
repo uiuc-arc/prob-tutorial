@@ -1,0 +1,102 @@
+def main(){
+    def diceroll(xx:R){
+        x := xx;
+        repeat 100{
+            coin := flip(0.5);
+            if x == 0{
+                if coin{
+                    x = 10;
+                }
+                else{
+                    x = 11;
+                }
+            }
+            else if x == 10{
+                if coin{
+                    x = 12;
+                }
+                else{
+                    x = 13;
+                }
+            }
+            else if x == 11{
+                if coin{
+                    x = 14;
+                }
+                else{
+                    x = 15;
+                }
+            }
+            else if x == 12{
+                if coin{
+                    x = 10;
+                }
+                else{
+                    x = 1;
+                }
+            }
+            else if x == 13{
+                if coin{
+                    x = 2;
+                }
+                else{
+                    x = 3;
+                }
+            }
+            else if x == 14{
+                if coin{
+                    x = 4;
+                }
+                else{
+                    x = 5;
+                }
+            }
+            else if x == 15{
+                if coin{
+                    x = 6;
+                }
+                else{
+                    x = 11;
+                }
+            }
+            else if x<1 || x>6{
+                x = -100;
+            }
+        }        
+        return x;
+    }
+
+    def min(a,b){
+        if a<b{
+            return a;
+        }
+        else{
+            return b;
+        }
+    }
+
+    def tworollsloaded(load){
+        r1 := diceroll(0);
+        r2 := diceroll(0);
+        r2prim := 0;
+        if r1 > 1{
+            r2prim = r2;
+        }
+        else{
+            r2prim = min(r2+load*flip(0.5),6);
+        }
+
+        return r1 + r2prim;
+    }
+
+    
+    observations := [9,10,3,2];
+    load := uniformInt(0,2);
+    for i in [0..4){
+        trl := tworollsloaded(load);
+        observe(trl == observations[i]);
+    }
+
+    return load;   
+
+}
