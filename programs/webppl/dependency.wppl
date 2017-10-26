@@ -1,0 +1,15 @@
+var test_x = function() {
+ var x = flip(0.50);
+
+ var y = x?
+   flip(0.1): flip(0.2);
+
+ var z = x?
+	flip(0.3): flip(0.4);
+
+ condition(x == 1)
+
+ return z;
+}
+
+Infer({method:'enumerate'}, test_x)

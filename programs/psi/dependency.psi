@@ -1,0 +1,21 @@
+def main(){
+    x := flip(0.50);
+    y := 0;
+    if x{
+        y = flip(0.1);
+    }
+    else{
+        y= flip(0.2);
+    }
+
+    z := 0;
+    if x{
+        z = flip(0.3);
+    }
+    else{
+        z= flip(0.4);
+    }
+
+    observe(x==1);
+    return z;
+}
