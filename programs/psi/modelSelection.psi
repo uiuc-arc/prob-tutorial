@@ -1,3 +1,27 @@
 def main(){
-    data := [0xA];
+    data := [10,11,12,12,12,12,10,13];
+    smallModel := [10,11,12];
+    bigModel := [10,11,12,13,14];
+
+    def compare(model: R[], data_pt)(){
+            idx := uniform(0, model.length-1);
+            noisy_data := data_pt - flip(0.1);
+            observe(data_pt == model[idx]);
+    }
+
+    isSmall := flip(0.5);
+
+    if(isSmall){
+        for i in [0..data.length]{
+            compare(smallModel, data[i]);
+        }
+    }
+    else{
+        for i in [0..data.length]{
+            compare(bigModel, data[i]);
+        }
+    }
+
+    return isSmall;
 }
+
