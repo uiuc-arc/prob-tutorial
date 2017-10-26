@@ -1,0 +1,20 @@
+var model = function(){  
+  var a = [[0.5,0.3,0.2], 
+          [0.4,0.2,0.4],
+          [0.3,0.2,0.5]];
+var b = [[0.5,0.5],[0.2,0.8],[0.1,0.9]] ;
+var x = 0;
+  var update = function(x){
+     return categorical({ps: a[x], vs: [0,1,2]});
+  }
+
+  var predict = function(x){
+    return categorical({ps: b[x], vs: [0,1]});
+}
+    var x1 =update(x);    
+    var x2 = update(x1);    
+    condition(predict(x2)==0);
+    return x2;
+};
+
+Infer({method: 'enumerate', maxExecutions: 1000}, model)
