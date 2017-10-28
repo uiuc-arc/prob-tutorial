@@ -1,4 +1,4 @@
-# prob-tutorial
+# Probabilistic programs
 This repo contains a set of demo probabilistic programs in both psi and webppl to help people understand how to model real world problems using probabilistic programming languages.
 
 Quickstart:
