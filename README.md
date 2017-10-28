@@ -13,3 +13,6 @@ This has psi and webppl installed. To run any example,go to programs folder and 
 `psi psi/burglarAlarm.psi`
 
 `webppl webppl/burglarAlarm.psi`
+
+Alternatively, you can get the Virtualbox VM [here](https://drive.google.com/open?id=0BxHnQE_Hmlq_X0JwM3pUVmgwUTg) if you dont want to use docker.
+
